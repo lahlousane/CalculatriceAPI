@@ -7,33 +7,42 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CalculatriceAPI.Services.Impl
 {
+
     using DTO;
     public class OperationStandardService : OperationService
     {
-        private static List<OperationDTO> utilisateurs = new List<OperationDTO>();
-        public IEnumerable<OperationDTO> TrouverTout()
+        private static List<OperationDTO> operations = new List<OperationDTO>();
+        private UtilisateurService utilisateurService;
+
+        public OperationStandardService(UtilisateurService utilisateurService)
         {
-            return utilisateurs.Where(u => u != null);
+            this.utilisateurService = utilisateurService;
+        } 
+            public IEnumerable<OperationDTO> TrouverTout()
+        {
+            return operations.Where(u => u != null);
         }
-        public OperationDTO TrouverUnUtilisateur(int id)
+        public OperationDTO TrouverUn(int id)
         {
-            return utilisateurs[id];
+            return operations[id];
         }
-        public OperationDTO AjouterUn(OperationDTO user)
+        public OperationDTO AjouterUn(OperationDTO data)
         {
-            user.Id = utilisateurs.Count();
-            utilisateurs.Add(user);
-            return user;
+            data.Id = operations.Count();
+            data.Auteur = this.UtilisateurService.TrouverUnUtilisateur(data.Auteur.Id);
+            operations.Add(data);
+            return data;
         }
-        public OperationDTO Modifier(int id, OperationDTO user)
+        public OperationDTO Modifier(int id, OperationDTO data)
         {
-            user.Id = id;
-            utilisateurs[id] = user;
-            return user;
+            data.Id = id;
+            data.Auteur = this.utilisateurService.TrouverUnUtilisateur(data.AuteurId);
+            perations[id] = data;
+            return data;
         }
         public void SupprimerUtilisateur(int id)
         {
-            utilisateurs[id] = null;
+            operations[id] = null;
         }
     }
 }

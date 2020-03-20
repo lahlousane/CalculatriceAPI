@@ -15,6 +15,8 @@ namespace CalculatriceAPI
 {
     using Services;
     using Services.Impl;
+    using Repositories;
+    using Repositories.Impl;
     public class Startup
     {
         public Startup(IConfiguration configuration)

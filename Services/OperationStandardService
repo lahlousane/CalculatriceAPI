@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace CalculatriceAPI.Services.Impl
 {
 
-
     using DTO;
     using Models;
     using Repositories;
@@ -16,7 +15,6 @@ namespace CalculatriceAPI.Services.Impl
     {
         
         private UtilisateurService utilisateurService;
-        // Injection repo
         private OperationRepository repository;
 
         public OperationStandardService(UtilisateurService utilisateurService, OperationRepository repository){
